@@ -25,9 +25,9 @@ public class WebShopTests {
             
             driverSetup.get(BASE_URL);
             
-            driverSetup.findElement(By.linkText("Log in")).click();
+            driverSetup.findElement(By.xpath("//a[text()='Log in']")).click();
             
-            driverSetup.findElement(By.linkText("Register")).click();
+            driverSetup.findElement(By.xpath("//a[text()='Register']")).click();
             
             driverSetup.findElement(By.id("gender-male")).click();
             driverSetup.findElement(By.id("FirstName")).sendKeys("John");
@@ -72,7 +72,7 @@ public class WebShopTests {
     }
     
     private boolean login(String email, String password) {
-        driver.findElement(By.linkText("Log in")).click();
+        driver.findElement(By.xpath("//a[text()='Log in']")).click();
         
         driver.findElement(By.id("Email")).sendKeys(email);
         driver.findElement(By.id("Password")).sendKeys(password);
@@ -88,12 +88,13 @@ public class WebShopTests {
     }
 
     private void logout() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-logout']")));
         driver.findElement(By.xpath("//a[@class='ico-logout']")).click();
     }
 
     private void changePassword(String newPassword) {
-        driver.findElement(By.linkText("My account")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Change password"))).click();
+        driver.findElement(By.xpath("//a[@class='account']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Change password']"))).click();
         
         driver.findElement(By.id("OldPassword")).sendKeys(PASSWORD);
         driver.findElement(By.id("NewPassword")).sendKeys(newPassword);
